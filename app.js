@@ -93,6 +93,20 @@ app.get('/users', function(req, res){
 
 })
 
+app.post('/transaction', function(req, res){
+    const lendee_id = req.body.new_transaction;
+
+    User.findById(lendee_id, function(err, lendeeUser){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.render('transaction', {title: "Transaction", lendee: lendeeUser});
+        }
+    })
+
+})
+
 app.listen(3000, function() {
     console.log("Server started on port 3000");
 });
