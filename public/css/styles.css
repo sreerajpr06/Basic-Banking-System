@@ -38,3 +38,25 @@ h1 {
     color: white;
 }
 
+.title {
+    font-size: 300%;
+    color: #15151a;
+}
+
+.button {
+    position: absolute;
+    margin-top: 10%;
+    height: 8%;
+    width: 20%;
+    background-color: #1d64f2;
+    color: #fff;
+    font-size: 170%;
+    font-weight: bold;
+    padding: 6px;
+    text-align: center;
+    line-height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
