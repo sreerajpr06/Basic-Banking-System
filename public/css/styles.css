@@ -1,0 +1,40 @@
+html {
+    background-color: #92c7de;
+    background-image: linear-gradient(to right, #49bcd6, #d2ebfa);
+    font-family: 'helvetica neue';
+}
+
+h1 {
+    color: #fff;
+    margin: 0%;
+}
+
+.row {
+    display: flex;
+}
+  
+.column {
+    flex: 50%;
+}
+
+.center {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    opacity: 100%;
+}
+  
+/* .center h1 {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.bank {
+    width:50%;
+    color: white;
+}
+
