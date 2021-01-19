@@ -11,6 +11,8 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/bankDB", {useNewUrlParser:true, useUnifiedTopology:true});
 
+mongoose.set('useFindAndModify', false);
+
 const usersSchema = {
     "name": String,
     "email": String,
@@ -94,18 +96,69 @@ app.get('/users', function(req, res){
 })
 
 app.post('/transaction', function(req, res){
-    const lendee_id = req.body.new_transaction;
+    const lender_id = req.body.new_transaction;
 
-    User.findById(lendee_id, function(err, lendeeUser){
+    User.findById(lender_id, function(err, lenderUser){
         if(err){
             console.log(err);
         }
         else{
-            res.render('transaction', {title: "Transaction", lendee: lendeeUser});
+            User.find({
+                _id: {$ne : lender_id}
+            }, function(err, restOfUsers){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.render('transaction', {title: "Transaction", lender: lenderUser, otherUsers: restOfUsers});
+                    // console.log(restOfUsers);
+                }
+            })
+        }
+    })
+    // res.redirect('/users')
+
+})
+
+app.post('/processing', async function(req, res){
+    const target_email = req.body.lendee;
+    const amount = parseInt(req.body.amount);
+    const lender_email = req.body.lender_details;
+
+    // console.log(target_email);
+    // console.log(amount);
+    // console.log(lender_email);
+
+    let target = await User.find({email: target_email});
+    target = target[0];
+    let target_balance = Number(target.balance + amount);
+
+    let lender = await User.find({email: lender_email});
+    lender = lender[0]
+    let lender_balance = Number(lender.balance - amount);
+    // console.log(lender);
+
+    await User.findByIdAndUpdate(target._id, {"balance": target_balance}, function(err, docs){
+        if(err){
+            console.log(target_balance);
+        }
+        else{
+            console.log("Target balance updated");
         }
     })
 
+    await User.findByIdAndUpdate(lender._id, {balance: lender_balance}, function(err, docs){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("lender balance updated");
+        }
+    })
+
+    res.redirect('/users');
 })
+
 
 app.listen(3000, function() {
     console.log("Server started on port 3000");

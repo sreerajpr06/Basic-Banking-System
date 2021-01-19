@@ -97,7 +97,7 @@ h1 {
 }
 
 .header {
-    font-weight: bolder;
+    font-weight: bold;
     font-size: 120%;
 }
 
@@ -106,4 +106,51 @@ h1 {
     color: #fff;
     min-width: 125px;
     border-radius: 7%;
+}
+
+.account {
+    min-width: 600px;
+    text-align: center;
+    padding-top: 5%;
+    font-size: 125%;
+    font-weight: bolder;
+}
+
+.box-transaction {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.select {
+    align-items: center;
+    margin-top: 5%;
+    display: flex;
+    font-size: 110%;
+}
+
+.select-box {
+    position:relative;
+    align-items: center;
+    margin-top: 7%;
+    display: flex;
+    font-size: 110%;
+    
+}
+
+select {
+    width: 75%;
+    font-family: 'helvetica neue';
+    font-size: 102%;
+    background-color: #f4fbfd;
+}
+
+.amount-box {
+    position:relative;
+    align-items: center;
+    margin-top: 3%;
+    display: flex;
+    font-size: 110%;
 }

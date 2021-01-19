@@ -1,12 +1,13 @@
 <%- include("header") -%>
 
-    <div class="box" id="heading">
+    <div class="box-transaction" id="heading">
         <h1> <%= title %> </h1>
     </div>
 
-    <!-- <div class="box">
+    <div class="box-transaction">
+        <div class="account">Account Details</div>
         <div class="row">
-                
+            
             <div class="column">
                 <div class="header">
                     <p>Name</p>
@@ -25,14 +26,73 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="row">
+            
             <div class="column">
-                <div class="header">
-                    <p>Make Transaction</p>
+                <div class="user">
+                    <p> <%= lender.name %> </p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="user">
+                    <p> <%= lender.email %> </p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="user">
+                    <p> <%= lender.balance %> </p>
                 </div>
             </div>
 
         </div>
+    
+    </div>
 
-    </div> -->
+    <div class="box-transaction">
+
+        <form action="/processing" method="POST" name="transfer_details" class="select-box">
+            <div>
+                <div class="row">
+                    <div class="account">Select the account transferring to</div>
+                </div>
+    
+                <div class="row">
+                    
+                    <div class="column">
+                            <p class="select">Select Email: </p>
+                    </div>
+    
+                    <div class="column">
+                        
+                            <select name="lendee" class="amount-box">
+                                <% otherUsers.forEach(function(user) { %>
+                                    <option > <%= user.email %> </option>
+                                <% }) %>
+                            </select>
+                            
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+                    <div class="column">
+                        <p class="select">Enter amount: </p>
+                    </div>
+                    <div class="column">
+                        <input type="number" name="amount" placeholder="Enter amount" class="amount-box">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" name="lender_details" class="transaction-button" value="<%= lender.email %>">Transaction</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
 
 <%- include("footer") -%>
